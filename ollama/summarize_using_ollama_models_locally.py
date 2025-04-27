@@ -17,7 +17,7 @@ nltk.download('wordnet')
 # Paths
 PDF_PATH = "./pdfs/done - Virtual Machine Consolidation with Minimization of Migration - 2020.pdf"
 OUTPUT_PATH = "cleaned_output.txt"
-
+# 
 # Extract text using PyMuPDF (fast + consistent encoding)
 def extract_text_pymupdf(pdf_path):
     doc = fitz.open(pdf_path)
