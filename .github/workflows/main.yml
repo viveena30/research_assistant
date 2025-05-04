@@ -5,6 +5,8 @@ on:
 jobs:
   summarize:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       HF_TOKEN: ${{ secrets.HF_TOKEN }}
       PDF_PATH: input.pdf
@@ -26,10 +28,54 @@ jobs:
         pip install -r requirements.txt
 
     - name: Run summarization
+      env:
+        HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        PDF_PATH: input.pdf
       run: python summarize.py
 
     - name: Upload summary as artifact
       uses: actions/upload-artifact@v3
       with:
-        name: pdf-summary
-        path: output_summary.txt
+        name: summary-output
+        path: summary.txt
+
+# on:
+#   workflow_dispatch:
+#     inputs:
+#       pdf_path:
+#         description: 'Relative path to the PDF (e.g. input.pdf)'
+#         required: true
+#         default: 'input.pdf'
+
+# jobs:
+#   summarize:
+#     runs-on: ubuntu-latest
+
+
+    # steps:
+    #   - name: Checkout repository
+    #     uses: actions/checkout@v3
+
+    #   - name: Set up Python
+    #     uses: actions/setup-python@v4
+    #     with:
+    #       python-version: '3.10'
+
+    #   - name: Install dependencies
+    #     run: |
+    #       python -m pip install --upgrade pip
+    #       pip install "unstructured[local-inference]"
+    #       pip install llama-index huggingface_hub llama-cpp-python
+
+      - name: Run PDF summarizer
+        env:
+          HUGGINGFACEHUB_API_TOKEN: ${{ secrets.HUGGINGFACEHUB_API_TOKEN }}
+        run: |
+          python summarize_pdf.py "${{ github.event.inputs.pdf_path }}"
+
+      - name: Upload summary as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: summary-output
+          path: summary.txt
+
