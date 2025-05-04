@@ -1,0 +1,35 @@
+name: Summarize PDF
+on:
+  workflow_dispatch:
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      PDF_PATH: input.pdf
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v3
+      with:
+        ref: unstructured_data
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
+
+    - name: Install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run summarization
+      run: python summarize.py
+
+    - name: Upload summary as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: pdf-summary
+        path: output_summary.txt
