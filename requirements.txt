@@ -1,7 +1,0 @@
-streamlit
-transformers
-torch
-PyMuPDF
-pdfplumber
-PyPDF2
-nltk
