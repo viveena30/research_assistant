@@ -33,13 +33,13 @@ jobs:
         PDF_PATH: input.pdf
       run: python summarize.py
 
-    - name: Upload summary as artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: summary-output
-        path: summary.txt
+#     - name: Upload summary as artifact
+#       uses: actions/upload-artifact@v3
+#       with:
+#         name: summary-output
+#         path: summary.txt
 
-# on:
+# # on:
 #   workflow_dispatch:
 #     inputs:
 #       pdf_path:
