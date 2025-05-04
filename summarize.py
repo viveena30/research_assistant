@@ -7,7 +7,7 @@ from unstructured.documents.elements import Title
 
 HF_TOKEN = os.environ.get("HF_TOKEN")  # Set this in GitHub secrets
 PDF_PATH = os.environ.get("PDF_PATH", "input.pdf")
-MODEL = "meta-llama/Meta-Llama-3-8B-Instruct"  # You can change this if needed
+MODEL = "facebook/bart-large-cnn"  # You can change this if needed
 
 # Extract elements from PDF
 elements = partition_pdf(PDF_PATH)
