@@ -1,0 +1,6 @@
+unstructured[local-inference]
+pandas
+python-docx
+transformers
+huggingface_hub
+requests
