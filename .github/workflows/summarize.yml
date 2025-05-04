@@ -1,6 +1,4 @@
-
 name: Summarize PDF
-
 on:
   push:
     branches: [ main ]
