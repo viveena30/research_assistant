@@ -67,15 +67,15 @@ jobs:
     #       pip install "unstructured[local-inference]"
     #       pip install llama-index huggingface_hub llama-cpp-python
 
-      - name: Run PDF summarizer
-        env:
-          HUGGINGFACEHUB_API_TOKEN: ${{ secrets.HUGGINGFACEHUB_API_TOKEN }}
-        run: |
-          python summarize_pdf.py "${{ github.event.inputs.pdf_path }}"
+      # - name: Run PDF summarizer
+      #   env:
+      #     HUGGINGFACEHUB_API_TOKEN: ${{ secrets.HUGGINGFACEHUB_API_TOKEN }}
+      #   run: |
+      #     python summarize_pdf.py "${{ github.event.inputs.pdf_path }}"
 
-      - name: Upload summary as artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: summary-output
-          path: summary.txt
+      # - name: Upload summary as artifact
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: summary-output
+      #     path: summary.txt
 
